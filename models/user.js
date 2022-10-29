@@ -12,31 +12,21 @@ class User extends Model {
 }
 
 //define table columns and configuration
-User.init(
-    {
-        //table column definitions go here
+User.init({
         id: {
-            // use the special Sequelize DataTypes object provide what type of data it is
             type: DataTypes.INTEGER,
-            // this is the equivalent of SQL's `NOT NULL` option
             allowNull: false,
-            // instruct that this is the Primary Key
             primaryKey: true,
-            // turn on auto increment
             autoIncrement: true
           },
-          // define a username column
           username: {
             type: DataTypes.STRING,
             allowNull: false
           },
-          // define an email column
           email: {
             type: DataTypes.STRING,
             allowNull: false,
-            // there cannot be any duplicate email values in this table
             unique: true,
-            // if allowNull is set to false, we can run our data through validators before creating the table data
             validate: {
               isEmail: true
             }
@@ -64,12 +54,8 @@ User.init(
                     return updatedUserData;
             }
         },
-        // table config options go here
-        // pass in our imported sequelize connection (the direct connection to our database)
         sequelize,
-        // don't automatically create createdAt/updatedAt timestamp 
         timestamps: false,
-        // don't pluralize name of database table
         freezeTableName: true,
         underscored: true,
         modelName: 'user'
